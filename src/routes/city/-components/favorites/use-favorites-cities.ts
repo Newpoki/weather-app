@@ -1,4 +1,8 @@
-import { citySchema, fetchCityByIdQueryOption } from "@/api/fetch-city-by-id";
+import {
+  citySchema,
+  fetchCityByIdQueryOption,
+  type City,
+} from "@/api/fetch-city-by-id";
 import { useLocalStorage } from "@/lib/use-local-storage";
 import { useQueryClient } from "@tanstack/react-query";
 import { useCallback, useMemo, useState } from "react";
@@ -42,7 +46,7 @@ export const useFavoritesCities = () => {
   });
 
   const handleToggleCity = useCallback(
-    (city: FavoriteCity) => {
+    (city: City) => {
       setFavoriteCities((currentFavoriteCities) => {
         const newValues = {
           ...currentFavoriteCities,
