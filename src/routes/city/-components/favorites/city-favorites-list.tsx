@@ -6,8 +6,11 @@ import {
   CommandInput,
   CommandList,
 } from "@/components/ui/command";
-import { CityFavoriteListItem } from "./city-favorite-list-item";
-import { useMemo } from "react";
+import {
+  CityFavoriteListItem,
+  getDisplayedCityName,
+} from "./city-favorite-list-item";
+import { useCallback, useMemo } from "react";
 
 type CityFavoritesListProps = {
   onClose: () => void;
@@ -25,8 +28,25 @@ export const CityFavoritesList = ({ onClose }: CityFavoritesListProps) => {
       );
   }, [favoriteCities]);
 
+  const filterList = useCallback(
+    (cityId: string, search: string) => {
+      const city = favoriteCities[cityId];
+
+      if (city == null) {
+        return 0;
+      }
+
+      return getDisplayedCityName(city)
+        .toLowerCase()
+        .includes(search.toLowerCase())
+        ? 1
+        : 0;
+    },
+    [favoriteCities],
+  );
+
   return (
-    <Command>
+    <Command filter={filterList}>
       <CommandInput autoFocus placeholder="Your favorites cities" />
       <CommandList>
         <CommandEmpty>No results found.</CommandEmpty>

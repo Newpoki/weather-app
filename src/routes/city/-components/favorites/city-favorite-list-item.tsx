@@ -2,6 +2,9 @@ import { CommandItem } from "@/components/ui/command";
 import { useNavigate } from "@tanstack/react-router";
 import type { FavoriteCity } from "./use-favorites-cities";
 
+export const getDisplayedCityName = (city: FavoriteCity) =>
+  `${city.name}, ${city.admin1}, ${city.country}`;
+
 type CityFavoriteListItemProps = {
   city: FavoriteCity;
   onValueSelected: () => void;
@@ -29,7 +32,7 @@ export const CityFavoriteListItem = ({
         className="h-5 w-5"
         alt={`Flag icon for the city's code country ${city.country_code.toLowerCase()}`}
       />
-      {city.name}, {city.admin1}, {city.country}
+      {getDisplayedCityName(city)}
     </CommandItem>
   );
 };
