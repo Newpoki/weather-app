@@ -58,5 +58,4 @@ export const CityFavoritesPicker = () => {
   );
 };
 
-// TODO: Find a way to remove a favorite city
 // TODO: Display a specific screen to show when user has no favorite yet
