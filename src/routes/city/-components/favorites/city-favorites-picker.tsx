@@ -6,13 +6,17 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { StarIcon } from "lucide-react";
-import React from "react";
+import { useCallback, useState } from "react";
 import { useMediaQuery } from "usehooks-ts";
 import { CityFavoritesList } from "./city-favorites-list";
 
 export const CityFavoritesPicker = () => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const isDesktop = useMediaQuery("(min-width: 768px)");
+
+  const handleClose = useCallback(() => {
+    setOpen(false);
+  }, []);
 
   if (isDesktop) {
     return (
@@ -28,7 +32,7 @@ export const CityFavoritesPicker = () => {
         </PopoverTrigger>
 
         <PopoverContent className="w-[500px] p-0" align="end">
-          <CityFavoritesList setOpen={setOpen} />
+          <CityFavoritesList onClose={handleClose} />
         </PopoverContent>
       </Popover>
     );
@@ -47,13 +51,12 @@ export const CityFavoritesPicker = () => {
       </DrawerTrigger>
       <DrawerContent>
         <div className="mt-4 border-t">
-          <CityFavoritesList setOpen={setOpen} />
+          <CityFavoritesList onClose={handleClose} />
         </div>
       </DrawerContent>
     </Drawer>
   );
 };
 
-// TODO: Create reusable utils to properly display a city name (flag, name, zone1,zone2, etc)
 // TODO: Find a way to remove a favorite city
 // TODO: Display a specific screen to show when user has no favorite yet

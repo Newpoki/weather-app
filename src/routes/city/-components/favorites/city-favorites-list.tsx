@@ -1,24 +1,21 @@
-import { useNavigate } from "@tanstack/react-router";
 import { useFavoritesCities } from "./use-favorites-cities";
 import {
   Command,
   CommandEmpty,
   CommandGroup,
   CommandInput,
-  CommandItem,
   CommandList,
 } from "@/components/ui/command";
+import { CityFavoriteListItem } from "./city-favorite-list-item";
 
 type CityFavoritesListProps = {
-  setOpen: (open: boolean) => void;
+  onClose: () => void;
 };
 
-export const CityFavoritesList = ({ setOpen }: CityFavoritesListProps) => {
-  const navigate = useNavigate();
-
+export const CityFavoritesList = ({ onClose }: CityFavoritesListProps) => {
   const { favoriteCities } = useFavoritesCities();
 
-  const options = Object.keys(favoriteCities);
+  const options = Object.values(favoriteCities);
 
   return (
     <Command>
@@ -27,20 +24,11 @@ export const CityFavoritesList = ({ setOpen }: CityFavoritesListProps) => {
         <CommandEmpty>No results found.</CommandEmpty>
         <CommandGroup>
           {options.map((option) => (
-            <CommandItem
-              key={option}
-              value={option}
-              onSelect={(value) => {
-                navigate({
-                  to: "/city/$city-id",
-                  params: { "city-id": value as any as number },
-                });
-
-                setOpen(false);
-              }}
-            >
-              {option}
-            </CommandItem>
+            <CityFavoriteListItem
+              key={option.id}
+              city={option}
+              onValueSelected={onClose}
+            />
           ))}
         </CommandGroup>
       </CommandList>
