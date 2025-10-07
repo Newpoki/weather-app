@@ -54,7 +54,6 @@ export const CityFavoritesPicker = () => {
   );
 };
 
-// TODO: Change favorite cities so it contains object instead of boolean
 // TODO: Create reusable utils to properly display a city name (flag, name, zone1,zone2, etc)
 // TODO: Find a way to remove a favorite city
 // TODO: Display a specific screen to show when user has no favorite yet

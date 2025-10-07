@@ -1,14 +1,21 @@
-import type { City } from "@/api/fetch-city-by-id";
+import { citySchema } from "@/api/fetch-city-by-id";
 import { useLocalStorage } from "@/lib/use-local-storage";
 import { useCallback, useMemo, useState } from "react";
 import z from "zod";
 
-const favoriteCitiesSchema = z.record(z.string(), z.boolean());
+const favoriteCitySchema = citySchema.extend({
+  updatedAt: z.number().int(),
+});
+
+const favoriteCitiesSchema = z.record(z.string(), favoriteCitySchema);
+
+export type FavoriteCity = z.infer<typeof favoriteCitySchema>;
+export type FavoriteCities = z.infer<typeof favoriteCitiesSchema>;
 
 export const useFavoritesCities = () => {
   const favoriteCitiesLS = useLocalStorage(
     "favorite-city",
-    favoriteCitiesSchema,
+    favoriteCitiesSchema.nullable(),
   );
 
   const [favoriteCities, setFavoriteCities] = useState(
@@ -16,14 +23,15 @@ export const useFavoritesCities = () => {
   );
 
   const handleToggleCity = useCallback(
-    (cityId: City["id"]) => {
+    (city: FavoriteCity) => {
       setFavoriteCities((currentFavoriteCities) => {
-        const cityCurrentFavoriteState = currentFavoriteCities[cityId] ?? false;
-
         const newValues = {
           ...currentFavoriteCities,
-          [cityId]: !cityCurrentFavoriteState,
-        };
+          [city.id]:
+            currentFavoriteCities[city.id] == null
+              ? { ...city, updatedAt: new Date().getTime() }
+              : null,
+        } satisfies FavoriteCities;
 
         favoriteCitiesLS.set(newValues);
 

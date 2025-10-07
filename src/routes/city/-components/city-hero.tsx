@@ -12,7 +12,7 @@ export const CityHero = () => {
 
   const { favoriteCities, toggleFavoriteCity } = useFavoritesCities();
 
-  const isFavoriteCity = favoriteCities[city.id] ?? false;
+  const isFavoriteCity = favoriteCities[city.id] != null;
 
   const FavoriteIconComponent = isFavoriteCity ? StarOffIcon : StarIcon;
 
@@ -24,8 +24,8 @@ export const CityHero = () => {
   }).format(new Date(forecast.current_weather.time));
 
   const handleToggleFavorite = useCallback(() => {
-    toggleFavoriteCity(city.id);
-  }, [city.id, toggleFavoriteCity]);
+    toggleFavoriteCity(city);
+  }, [city, toggleFavoriteCity]);
 
   return (
     <div className="relative flex flex-col gap-3 rounded-[20px] bg-[url('/mobile-hero.svg')] bg-cover bg-center px-6 pt-20 pb-10 text-center md:flex-row md:items-center md:justify-between md:bg-[url('/desktop-hero.svg')] md:py-[84px] md:text-left">
