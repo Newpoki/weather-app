@@ -17,10 +17,12 @@ export const CityFavoritesList = ({ onClose }: CityFavoritesListProps) => {
   const { favoriteCities } = useFavoritesCities();
 
   const sortedFavorites = useMemo(() => {
-    return Object.values(favoriteCities).toSorted(
-      // Most recent favorite cities are displayed first
-      (cityA, cityB) => cityB.updatedAt - cityA.updatedAt,
-    );
+    return Object.values(favoriteCities)
+      .filter(Boolean)
+      .toSorted(
+        // Most recent favorite cities are displayed first
+        (cityA, cityB) => cityB.updatedAt - cityA.updatedAt,
+      );
   }, [favoriteCities]);
 
   return (

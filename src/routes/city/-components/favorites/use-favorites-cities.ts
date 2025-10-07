@@ -8,7 +8,10 @@ const favoriteCitySchema = citySchema.extend({
   updatedAt: z.number().int(),
 });
 
-const favoriteCitiesSchema = z.record(z.string(), favoriteCitySchema);
+const favoriteCitiesSchema = z.record(
+  z.string(),
+  favoriteCitySchema.nullable(),
+);
 
 export type FavoriteCity = z.infer<typeof favoriteCitySchema>;
 export type FavoriteCities = z.infer<typeof favoriteCitiesSchema>;
