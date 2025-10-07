@@ -5,12 +5,12 @@ import { StarIcon, StarOffIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useCallback } from "react";
-import { useFavoriteCities } from "./use-favorite-cities";
+import { useFavoritesCities } from "./favorites/use-favorites-cities";
 
 export const CityHero = () => {
   const { forecast, unit, city } = useFetchCityAndForecast();
 
-  const { favoriteCities, toggleFavoriteCity } = useFavoriteCities();
+  const { favoriteCities, toggleFavoriteCity } = useFavoritesCities();
 
   const isFavoriteCity = favoriteCities[city.id] ?? false;
 

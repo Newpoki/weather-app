@@ -1,12 +1,4 @@
 import { Button } from "@/components/ui/button";
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-} from "@/components/ui/command";
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 import {
   Popover,
@@ -16,16 +8,9 @@ import {
 import { StarIcon } from "lucide-react";
 import React from "react";
 import { useMediaQuery } from "usehooks-ts";
-import { useFavoriteCities } from "../use-favorite-cities";
-import { useNavigate } from "@tanstack/react-router";
 import { CityFavoritesList } from "./city-favorites-list";
 
-type Status = {
-  value: string;
-  label: string;
-};
-
-export const CityFavoritePicker = () => {
+export const CityFavoritesPicker = () => {
   const [open, setOpen] = React.useState(false);
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
@@ -52,9 +37,6 @@ export const CityFavoritePicker = () => {
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
-        {/* <Button variant="outline" className="w-[150px] justify-start">
-            {selectedStatus ? <>{selectedStatus.label}</> : <>+ Set status</>}
-          </Button> */}
         <Button
           size="default"
           className="aspect-square w-auto p-0"

@@ -19,7 +19,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { useNavigate } from "@tanstack/react-router";
 import type { City } from "@/api/fetch-city-by-id";
 import { CitySearchMenuItem } from "./city-search-menu-item";
-import { CityFavoritePicker } from "../favorite/city-favorite-picker";
+import { CityFavoritesPicker } from "../favorites/city-favorites-picker";
 
 export const CitySearch = () => {
   const [search, setSearch] = useState("");
@@ -138,7 +138,7 @@ export const CitySearch = () => {
           </PopoverContent>
         </Popover>
 
-        <CityFavoritePicker />
+        <CityFavoritesPicker />
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 import { useNavigate } from "@tanstack/react-router";
-import { useFavoriteCities } from "../use-favorite-cities";
+import { useFavoritesCities } from "./use-favorites-cities";
 import {
   Command,
   CommandEmpty,
@@ -16,7 +16,7 @@ type CityFavoritesListProps = {
 export const CityFavoritesList = ({ setOpen }: CityFavoritesListProps) => {
   const navigate = useNavigate();
 
-  const { favoriteCities } = useFavoriteCities();
+  const { favoriteCities } = useFavoritesCities();
 
   const options = Object.keys(favoriteCities);
 

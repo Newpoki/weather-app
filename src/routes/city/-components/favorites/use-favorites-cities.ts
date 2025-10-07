@@ -5,7 +5,7 @@ import z from "zod";
 
 const favoriteCitiesSchema = z.record(z.string(), z.boolean());
 
-export const useFavoriteCities = () => {
+export const useFavoritesCities = () => {
   const favoriteCitiesLS = useLocalStorage(
     "favorite-city",
     favoriteCitiesSchema,
