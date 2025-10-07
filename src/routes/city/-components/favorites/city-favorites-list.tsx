@@ -47,9 +47,17 @@ export const CityFavoritesList = ({ onClose }: CityFavoritesListProps) => {
 
   return (
     <Command filter={filterList}>
-      <CommandInput autoFocus placeholder="Your favorites cities" />
+      <CommandInput
+        autoFocus
+        placeholder="Your favorites cities"
+        disabled={sortedFavorites.length === 0}
+      />
       <CommandList>
-        <CommandEmpty>No results found.</CommandEmpty>
+        <CommandEmpty>
+          {sortedFavorites.length === 0
+            ? "You haven't save as favorite any city yet."
+            : "No results found."}
+        </CommandEmpty>
         <CommandGroup>
           {sortedFavorites.map((option) => (
             <CityFavoriteListItem

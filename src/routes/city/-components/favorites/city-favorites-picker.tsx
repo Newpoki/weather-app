@@ -57,5 +57,3 @@ export const CityFavoritesPicker = () => {
     </Drawer>
   );
 };
-
-// TODO: Display a specific screen to show when user has no favorite yet

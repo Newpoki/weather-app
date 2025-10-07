@@ -20,7 +20,7 @@ export const useFavoritesCities = () => {
   const queryClient = useQueryClient();
 
   const favoriteCitiesLS = useLocalStorage(
-    "favorite-city",
+    "FAVORITE_CITIES",
     favoriteCitiesSchema.nullable(),
   );
 
