@@ -7,6 +7,7 @@ import {
   CommandList,
 } from "@/components/ui/command";
 import { CityFavoriteListItem } from "./city-favorite-list-item";
+import { useMemo } from "react";
 
 type CityFavoritesListProps = {
   onClose: () => void;
@@ -15,7 +16,12 @@ type CityFavoritesListProps = {
 export const CityFavoritesList = ({ onClose }: CityFavoritesListProps) => {
   const { favoriteCities } = useFavoritesCities();
 
-  const options = Object.values(favoriteCities);
+  const sortedFavorites = useMemo(() => {
+    return Object.values(favoriteCities).toSorted(
+      // Most recent favorite cities are displayed first
+      (cityA, cityB) => cityB.updatedAt - cityA.updatedAt,
+    );
+  }, [favoriteCities]);
 
   return (
     <Command>
@@ -23,7 +29,7 @@ export const CityFavoritesList = ({ onClose }: CityFavoritesListProps) => {
       <CommandList>
         <CommandEmpty>No results found.</CommandEmpty>
         <CommandGroup>
-          {options.map((option) => (
+          {sortedFavorites.map((option) => (
             <CityFavoriteListItem
               key={option.id}
               city={option}
