@@ -1,0 +1,14 @@
+{
+  "short_name": "Weather App",
+  "name": "Weather app based on Open Meteo API",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "type": "image/svg+xml"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
